@@ -1,0 +1,118 @@
+CREATE database mydb;
+
+USE mydb;
+
+CREATE TABLE ambassador (amb_id varchar(255) primary key, amb_name varchar(255),amb_phone varchar(25), amb_alt_phone varchar(25));
+
+CREATE TABLE customer (cust_id varchar(255) primary key, cust_name varchar(255), cust_phone varchar(25), cust_alt_phone varchar(25));
+
+CREATE TABLE network_partner(np_id varchar(255) primary key, np_name varchar(255), np_address text);
+
+CREATE TABLE queue (queue_id int primary key auto_increment, amb_id varchar(255), cust_id varchar(255), np_id varchar(255), status text, slot varchar(255), source_address text, dest_address text, foreign key(amb_id) references ambassador(amb_id),foreign key(cust_id) references customer(cust_id),foreign key(np_id) references network_partner(np_id));
+
+
+CREATE TABLE network_partner_people(npp_id varchar(255) primary key,npp_name varchar(255),np_id varchar(255),
+npp_phone varchar(25), npp_alt_phone varchar(25),  foreign key(np_id) references network_partner(np_id));
+
+CREATE TABLE ticket(ticket_id varchar(255) primary key, message text, ticket_gen_time varchar(255), ticket_status varchar(255),ticket_gen_loc varchar(255), queue_id int, foreign key(queue_id) references queue(queue_id));
+
+CREATE TABLE ETA(eta_id int auto_increment primary key, queue_id int,eta text, foreign key(queue_id) references queue(queue_id));
+
+use mydb;
+
+alter table network_partner_people add designation varchar(255);
+
+describe network_partner_people;
+
+insert into ambassador (amb_id,amb_name,amb_phone,amb_alt_phone)
+values(
+"52401","Mr. Bannerjee", "9123456789", "8912345678"
+),
+("52402", "Mr. Talvar", "9876543219", "8765432198"),
+("52403", "Mr. Ramesh", "7867564534", "7654387657"),
+("52404", "Mr. Kamli", "6574387987", "9123456786"),
+("52405", "Mr. Radhe Shyam", "8768769565", "9187675643"),
+("52406", "Mr. Rajnish", "7685945637", "7865786594"),
+("52407", "Mr. Karunesh", "9623454327", "9812534267"),
+("52408", "Mr. Krishna", "9698765432", "9878697657");
+
+SELECT * from ambassador;
+
+
+insert into customer (cust_id,cust_name,cust_phone,cust_alt_phone)
+values(
+"924001","Mr. mahendra", "9123456789", "8912345678"
+),
+("924002", "Mr. Kapil", "9876543219", "8765432198"),
+("924003", "Mr. Ramesh", "7867564534", "7654387657"),
+("924004", "Mr. Sharma", "6574387987", "9123456786"),
+("924005", "Mr. Radhe Shyam", "8768769565", "9187675643"),
+("924006", "Mrs. Rashmi", "7685945637", "7865786594"),
+("924007", "Mr. Mridul", "9623454327", "9812534267"),
+("924008", "Mr. Mohan", "9698765432", "9878697657");
+
+select * from customer;
+
+insert into network_partner (np_id,np_name,np_address)
+values(
+"8001", "Advait Hyundai", "Kormangla"
+),
+("8002", "Audi Ranchi", "Ranchi"),
+("8003", "Namma Mercedes", "M G Road"),
+("8004", "Premson Maruti", "Ranchi"),
+("8005", "Pratha Motors", "HSR Layout"),
+("8006", "Trident Hyundai", "Kengeri"),
+("8007", "Blue Hyundai","R R Nagar"),
+("8008", "Lakshmi Honda", "Hebbal"),
+("8009", "Perfect Yamaha", "Kormangla"),
+("8010", "Blue Yamaha", "HSR Layout");
+
+select * from network_partner;
+
+insert into queue(amb_id,cust_id,np_id,status,slot)
+values (
+"52401","924001","8001","Amabassador on the way for pick up","9:00AM"
+),
+("52401","924001","8001","Amabassador on the way for pick up","9:00AM"),
+("52402","924002","8002","Amabassador on the way for pick up","10:00AM"),
+("52403","924003","8003","Amabassador on the way for drop","11:00AM"),
+("52404","924004","8004","Amabassador on the way to Service center","12:00PM"),
+("52405","924005","8005","Amabassador on the way for Drop","1:00PM"),
+("52406","924006","8006","Amabassador on the way for pick up","9:00AM"),
+("52407","924007","8007","Amabassador on the way for pick up","9:00AM");
+
+select * from queue;
+
+update queue set source_address="HSR Layout", dest_address="Kormangla" where queue_id=1;
+update queue set source_address="Hinoo", dest_address="Ranchi" where queue_id=3;
+update queue set source_address="Kengeri", dest_address="M G Road" where queue_id=2;
+update queue set source_address="R R Nagar", dest_address="Kengeri" where queue_id=4;
+update queue set source_address="Kormangla", dest_address="HSR Layout" where queue_id=5;
+update queue set source_address="Vijayanagara", dest_address="Kengeri" where queue_id=6;
+update queue set source_address="Kengeri", dest_address="R R Nagar" where queue_id=7;
+
+delete from queue where queue_id=8;
+select * from queue;
+
+insert into network_partner_people(npp_id,npp_name,np_id,npp_phone,npp_alt_phone,designation)
+values (
+"301", "Mr. Rahul", "8001", "9786765434", "8976564567", "Service Advisor"
+),
+("302", "Mr. Chanakya", "8001", "9786765434", "8976564567", "CRE"),
+("303", "Mr. Robin", "8001", "9786765434", "8976564567", "Account Manager");
+
+select * from network_partner_people;
+
+insert into ticket(ticket_id,message,ticket_gen_time,ticket_status,ticket_gen_loc,queue_id)
+values("5674641","Breakdown / Accident", "2021-02-04 11:48:57", "2", "HSR Layout",1),
+("5674642","Update Number", "2021-02-01 9:4:09:57", "2", "Kengeri",2),
+("5674643","Come Later", "2021-02-04 9:40:57", "2", "Hinoo",3),
+("5674644","Breakdown / Accident", "2021-02-06 10:48:57", "2", "Kengeri",4),
+("5674645","Not Answering", "2021-02-08 11:48:57", "2", "HSR Layout",5),
+("5674646","Breakdown / Accident", "2021-02-11 12:48:57", "2", "Vijayanagara",6);
+
+select * from ticket;
+
+insert into ETA (queue_id, eta)
+values(3," 9:56 AM (4.6 kms)"),
+(5," 11:56 AM (1.6 kms)");

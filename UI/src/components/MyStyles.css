@@ -1,0 +1,103 @@
+.nav-color{
+    background-color: #e5f3f3;
+}
+
+.col-height{
+    height: 750px;
+    overflow-y: scroll;
+}
+.my-footer{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.back-col{
+    background-color:#969cf5
+}
+
+.set-dim{
+    height:40px;
+    width:40px;
+}
+
+.set-dim-sm{
+    height:35px;
+    width:35px;
+}
+
+.set-dim-side{
+    height:60px;
+    width:60px;
+}
+
+.detail-icon{
+    height:20px;
+    width:20px;
+}
+
+.align-center{
+    padding-top: 10px;
+    text-align:center;
+}
+
+.pick-way{
+    font-size: 13px;
+    font-style: italic;
+}
+
+.prog-bar{
+    width: 5%;
+}
+
+.call-bg{
+    background-color: blue;
+    height: 50px;
+    border-left: 1px solid white;
+    color: white;
+}
+
+.call-bg-rad-lg{
+    border-radius: 0px 10px 10px 0px;
+}
+
+.call-bg-rad-sm{
+    border-radius: 10px 0px 0px 10px;
+}
+
+.btn-cent{
+    text-align: center;
+    font-size: 15px;
+}
+
+.btn-col{
+    width: 100px;
+    border-radius: 2px 2px 2px 2px;
+}
+
+.font-check{
+    padding-top: 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.font-check-data{
+    padding-top: 10px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.min-size{
+    font-size: 11px;
+}
+
+.ser-det{
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.ser-det-sm{
+    font-weight: unset;
+}
+
+.set-pad{
+    padding-top: unset;
+}
